@@ -1,0 +1,5 @@
+October 14th:
+
+Camera feed is running and can be accessed from web. 
+Made minor modifications to html and css files to start
+playing with the settings for the gui. :wq
