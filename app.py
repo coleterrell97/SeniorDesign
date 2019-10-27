@@ -19,7 +19,6 @@ def index():
     """Video streaming home page."""
     return render_template('index.html')
 
-
 def gen_frame():
     """Video streaming generator function."""
     if two_cameras: # Stitch two feeds together
@@ -42,6 +41,5 @@ def video_feed():
     return Response(gen_frame(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', threaded=True)
+    app.run(host='0.0.0.0', threaded=True, port=80)
