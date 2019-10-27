@@ -10,6 +10,7 @@ two_cameras = input('Do you have two cameras (Y/N)? ').lower() == 'y'
 src1 = int(input('Camera source 1: '))
 if two_cameras: src2 = int(input('Camera source 2: '))
 
+global cap1, cap2
 # Start video capturing
 cap1 = CameraStream(src=src1).start()
 if two_cameras: cap2 = CameraStream(src=src2).start()
@@ -41,5 +42,14 @@ def video_feed():
     return Response(gen_frame(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
+# Background process happening without any refreshing
+@app.route('/flip_cameras')
+def flip_cameras():
+    global cap1, cap2
+    if two_cameras:
+        temp = cap1
+        cap1 = cap2
+        cap2 = temp
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', threaded=True, port=80)
+    app.run(host='0.0.0.0', port=80, threaded=True)
