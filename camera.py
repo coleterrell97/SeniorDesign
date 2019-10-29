@@ -4,6 +4,8 @@ import cv2
 class CameraStream(object):
     def __init__(self, src=0):
         self.stream = cv2.VideoCapture(src)
+        self.stream.set(3,1280)
+        self.stream.set(4,720)
         (self.grabbed, self.frame) = self.stream.read()
         self.started = False
         self.read_lock = Lock()

@@ -8,12 +8,13 @@ app = Flask(__name__)
 # Get camera sources
 two_cameras = input('Do you have two cameras (Y/N)? ').lower() == 'y'
 src1 = int(input('Camera source 1: '))
-if two_cameras: src2 = int(input('Camera source 2: '))
+if two_cameras:	src2 = int(input('Camera source 2: '))
 
 global cap1, cap2
 # Start video capturing
 cap1 = CameraStream(src=src1).start()
 if two_cameras: cap2 = CameraStream(src=src2).start()
+
 
 @app.route('/')
 def index():
