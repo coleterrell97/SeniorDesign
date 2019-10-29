@@ -21,7 +21,6 @@ def index():
     """Video streaming home page."""
     return render_template('index.html')
 
-
 def gen_frame():
     """Video streaming generator function."""
     if two_cameras: # Stitch two feeds together
@@ -44,18 +43,14 @@ def video_feed():
     return Response(gen_frame(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
-#background process happening without any refreshing
+# Background process happening without any refreshing
 @app.route('/flip_cameras')
 def flip_cameras():
-    print("got here")
     global cap1, cap2
     if two_cameras:
         temp = cap1
         cap1 = cap2
         cap2 = temp
-        print("flipped cameras")
-    return("")
-
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5004, threaded=True)
+    app.run(host='0.0.0.0', port=80, threaded=True)
