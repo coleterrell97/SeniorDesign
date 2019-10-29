@@ -9,3 +9,8 @@ October 15th:
 
 Added button/feature that allows camera feeds to switched 
 in the display.
+
+
+October 28th:
+
+Created simple settings page. 
