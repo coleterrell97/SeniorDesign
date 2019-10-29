@@ -1,0 +1,12 @@
+10/29/19
+
+It is my job to implement an API using Flask that can connect our UI to the application that manages our cameras.
+I have found an interesting blog that covers Flask, JSON, and how to combine the two to make a simple API.
+
+Current Tasks:
+  I Will spend some time this afternoon building some example API calls to learn the basics of designing an API.
+  Once this is done, I will need to talk with Shelby and Bryce so that we can start connecting API calls to the UI elements that exist
+  on our webpage.
+
+Challenges:
+	I am inexperienced using Flask and JSON, so I will need to learn these tools from scratch.
