@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <title>Settings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='settings.css') }}">
+  </head>
+
+  <body>
+    <div class="w3-panel w3-red">
+  <p><center>Settings</center></p>
+
+<button onclick="window.location.href='/'">Back</button>
+
+  <div class="slidecontainer">
+    <label for="-15" class="pull-left">-15</label>
+  <input type="range" min="-15" max="15" value="0" class="slider" id="myRange">
+    <label for="15" class="pull-right">15</label>
+   <label>Brightness</label>
+</div>
+
+<div class="slidecontainer">
+  <label for="-15" class="pull-left">-15</label>
+<input type="range" min="-15" max="15" value="0" class="slider" id="myRange">
+  <label for="15" class="pull-right">15</label>
+ <label>Brightness</label>
+</div>
+
+<div class="slidecontainer">
+  <label>0</label>
+<input type="range" min="0" max="30" value="0" class="slider" id="Contrast">
+  <label>30</label>
+ <label>Contrast</label>
+</div>
+
+<div class="slidecontainer">
+  <label>0</label>
+<input type="range" min="0" max="60" value="0" class="slider" id="Saturation">
+  <label>60</label>
+ <label>Saturation</label>
+</div>
+
+<div class="slidecontainer">
+  <label>0</label>
+<input type="range" min="0" max="127" value="0" class="slider" id="Sharpness">
+  <label>127</label>
+ <label>Sharpness</label>
+</div>
+
+ <div class="slidecontainer">
+  <label>40</label>
+<input type="range" min="40" max="500" value="0" class="slider" id="Gamma">
+  <label>500</label>
+ <label>Gamma</label>
+</div>
+
+<div class="slidecontainer">
+  <label>1000</label>
+<input type="range" min="1000" max="10000" value="0" class="slider" id="White Balance Blue">
+  <label>10000</label>
+ <label>White Balance Blue</label>
+</div>
+
+
+    </div>
+  </body>
+</html>

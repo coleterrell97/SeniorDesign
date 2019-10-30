@@ -21,6 +21,11 @@ def index():
     """Video streaming home page."""
     return render_template('index.html')
 
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
+
+
 def gen_frame():
     """Video streaming generator function."""
     if two_cameras: # Stitch two feeds together
