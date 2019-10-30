@@ -12,7 +12,7 @@ if two_cameras:	src2 = int(input('Camera source 2: '))
 
 global cap1, cap2
 # Start video capturing
-cap1 = CameraStream(src=src1).start()
+cap1 = CameraStream(src=src1, resize=(500,500)).start()
 if two_cameras: cap2 = CameraStream(src=src2).start()
 
 # Video streaming home page
@@ -36,9 +36,10 @@ def gen_frame():
                    b'Content-Type: image/jpeg\r\n\r\n' + convert + b'\r\n') # Concate frame one by one and show result
     else: # Only one camera feed
         while cap1:
-            convert = cv2.imencode('.jpg', cap1.frame)[1].tobytes()
+            # convert = cv2.imencode('.jpg', cap1.frame)[1].tobytes()
+            bytes = cap1.read()
             yield (b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + convert + b'\r\n') # Concate frame one by one and show result
+                   b'Content-Type: image/jpeg\r\n\r\n' + bytes + b'\r\n') # Concate frame one by one and show result
 
 # Video streaming route. Put this in the src attribute of an img tag
 @app.route('/video_feed')
@@ -50,6 +51,7 @@ def video_feed():
 def exit(sigal_num, signal_frame):
     cap1.stop()
     if two_cameras: cap2.stop()
+    print() # Makes the path appear in the right spot afterwards
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, threaded=True)
