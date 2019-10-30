@@ -1,0 +1,20 @@
+{"camera-properties":
+  [
+    {"CAP_PROP_BRIGHTNESS" : 0},
+    {"CAP_PROP_CONTRAST" : 15},
+    {"CAP_PROP_SATURATION" : 32},
+    {"CAP_PROP_SHARPNESS" : 16},
+    {"CAP_PROP_GAMMA" : 220},
+    {"CAP_PROP_WHITE_BALANCE_BLUE_U" : 5000},
+    {"CAP_PROP_GAIN" : 0},
+    {"CAP_PROP_PAN" : 0},
+    {"CAP_PROP_TILT" : 0},
+    {"CAP_PROP_ZOOM" : 100},
+    {"CAP_PROP_EXPOSURE" : 312},
+    {"CAP_PROP_BACKLIGHT" : },
+    {"CAP_PROP_ROLL" : },
+    {"CAP_PROP_IRIS" : },
+    {"CAP_PROP_FOCUS" : },
+    {"CAP_PROP_HUE" : },
+  ]
+}
