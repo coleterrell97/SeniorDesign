@@ -12,3 +12,6 @@ Today, we met with Paras at the eye clinic to get hands on exposure to a slit la
 
 ### 10/25/19
 Got external hosting working. Now, anyone who goes to the host's IP address will be able to see the video stream. This was accomplished by changing the Flask port to 80 as well as some router port forwarding configuration. [This](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide/) is the guide I used to set up port forwarding on my home router. We also had a group call with Paras today where we laid out the next steps of the project. The next big goals will be more reliable streaming and some basic user interfacing.
+
+### 10/30/19
+Added an exit function that safely joins the CameraStream thread back to the parent to prevent a zombie process. This happens when a ctrl^c SIGINT is called. Basic resizing capability has also been added.
