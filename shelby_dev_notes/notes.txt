@@ -12,5 +12,10 @@ in the display.
 
 
 October 28th:
+Created simple settings page.
 
-Created simple settings page. 
+November 9th:
+Worked on updating the architecture assignment. We got a 75 on it
+the first time around so we took the feedback we recieved and 
+updated the document accordingly. 
+ 
