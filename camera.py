@@ -38,10 +38,8 @@ class CameraStream(object):
     def read(self):
         self.read_lock.acquire()
         frame = self.frame.copy()
-        jpg = cv2.imencode('.jpg', self.frame.copy())[1]
-        bytes = jpg.tobytes()
         self.read_lock.release()
-        return bytes
+        return frame
 
     # Makes the camera stream resize the captured frames to the specified dimensions
     def resize(width, height=None):
