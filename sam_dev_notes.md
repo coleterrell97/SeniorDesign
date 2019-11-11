@@ -15,3 +15,6 @@ Got external hosting working. Now, anyone who goes to the host's IP address will
 
 ### 10/30/19
 Added an exit function that safely joins the CameraStream thread back to the parent to prevent a zombie process. This happens when a ctrl^c SIGINT is called. Basic resizing capability has also been added.
+
+### 11/10/19
+Created a `dual_stream.py`: a script that implements two threaded CameraStream objects and stitches the two images together to create a VR viewable image. It starts by prompting the user to input which camera sources to use. Then, it creates the camera objects. Finally, it continually streams the stitched images to an OpenCV window. Behind the scenes it is applying a crop function that takes the two images and fits them to a desired aspect ratio so that it fully fills up the VR headset's screen. It also has a zoom function that is determined based on a config .json file.
