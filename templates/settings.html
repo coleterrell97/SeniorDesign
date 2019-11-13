@@ -11,55 +11,71 @@
 
 <button onclick="window.location.href='/'">Back</button>
 
+<form method="POST" action="/update_values">
   <div class="slidecontainer">
+
     <label for="-15" class="pull-left">-15</label>
-  <input type="range" min="-15" max="15" value="0" class="slider" id="myRange">
-    <label for="15" class="pull-right">15</label>
-   <label>Brightness</label>
-</div>
-
-<div class="slidecontainer">
-  <label for="-15" class="pull-left">-15</label>
-<input type="range" min="-15" max="15" value="0" class="slider" id="myRange">
+  <input type="range" min="-15" max="15" value="0" name="brightness_slider" class="slider" id="myRange">
   <label for="15" class="pull-right">15</label>
- <label>Brightness</label>
-</div>
+  <label>Brightness</label>
 
-<div class="slidecontainer">
-  <label>0</label>
-<input type="range" min="0" max="30" value="0" class="slider" id="Contrast">
+  <br><label>0</label>
+  <input type="range" min="0" max="30" value="0" name="contrast_slider" class="slider" name="contrast_slider" id="Contrast">
   <label>30</label>
- <label>Contrast</label>
-</div>
+  <label>Contrast</label>
 
-<div class="slidecontainer">
-  <label>0</label>
-<input type="range" min="0" max="60" value="0" class="slider" id="Saturation">
+  <br><label>0</label>
+  <input type="range" min="0" max="60" value="0" name="saturation_slider" class="slider" id="Saturation">
   <label>60</label>
- <label>Saturation</label>
-</div>
+  <label>Saturation</label>
 
-<div class="slidecontainer">
-  <label>0</label>
-<input type="range" min="0" max="127" value="0" class="slider" id="Sharpness">
+  <br><label>0</label>
+  <input type="range" min="0" max="127" value="0" name="sharpness_slider" class="slider" id="Sharpness">
   <label>127</label>
- <label>Sharpness</label>
-</div>
+  <label>Sharpness</label>
 
- <div class="slidecontainer">
-  <label>40</label>
-<input type="range" min="40" max="500" value="0" class="slider" id="Gamma">
+  <br><label>40</label>
+  <input type="range" min="40" max="500" value="0" name="gamma_slider" class="slider" id="Gamma">
   <label>500</label>
- <label>Gamma</label>
-</div>
+  <label>Gamma</label>
 
-<div class="slidecontainer">
-  <label>1000</label>
-<input type="range" min="1000" max="10000" value="0" class="slider" id="White Balance Blue">
-  <label>10000</label>
- <label>White Balance Blue</label>
-</div>
+  <br><input type="range" min="40" max="500" value="0" name="white_slider" class="slider" id="Gamma">
+  <label>White Balance Blue</label>
 
+  <br><input type="range" min="40" max="500" value="0" name="gain_slider" class="slider" id="Gamma">
+  <label>Gain</label>
+
+  <br><input type="range" min="40" max="500" value="0" name="Pan_slider" class="slider" id="Gamma">
+  <label>Pan</label>
+
+  <br><input type="range" min="0" max="500" value="0" name="tilt_slider" class="slider" id="Gamma">
+  <label>Tilt</label>
+
+  <br><input type="range" min="0" max="500" value="0" name="zoom_slider" class="slider" id="Gamma">
+  <label>Zoom</label>
+
+  <br><input type="range" min="0" max="500" value="0" name="exposure_slider" class="slider" id="Gamma">
+  <label>Exposure</label>
+
+  <br><input type="range" min="0" max="500" value="0" name="backlight_slider" class="slider" id="Gamma">
+  <label>Backlight</label>
+
+  <br><input type="range" min="0" max="500" value="0" name="roll_slider" class="slider" id="Gamma">
+  <label>Roll</label>
+
+  <br><input type="range" min="0" max="500" value="0" name="iris_slider" class="slider" id="Gamma">
+  <label>Iris</label>
+
+  <br><input type="range" min="0" max="500" value="0" name="focus_slider" class="slider" id="Gamma">
+  <label>Focus</label>
+
+  <br><input type="range" min="0" max="500" value="0" name="hue_slider" class="slider" id="Gamma">
+  <label>Hue</label>
+
+  <br><input type="submit" value="submit" />
+
+</div>
+</form>
 
     </div>
   </body>
