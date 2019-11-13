@@ -94,11 +94,8 @@ def update_values():
     config_settings["CAP_PROP_HUE"] = int(hue_update)
 
     file_to_open = "./API_files/camera_props.json"
-    with open(file_to_open, "r+") as f:
-        data = f.read()
-        f.seek(0)
-        f.write(re.sub(r"<string>ABC</string>(\s+)<string>(.*)</string>", r"<xyz>ABC</xyz>\1<xyz>\2</xyz>", data))
-        f.truncate()
+    with open(file_to_open, "w") as f:
+        f.write(json.dumps(config_settings))
 
     print(config_settings)
     return render_template('index.html')
