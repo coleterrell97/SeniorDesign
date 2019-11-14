@@ -12,6 +12,45 @@ HEIGHT = 900 # Screen height
 ZOOM_MAX = 6
 MAX_FRAMERATE = 30 # Frames per second
 
+# CV2 enumerator to be used for adjusting properties
+PROPERTIES = [
+    cv2.CAP_PROP_BRIGHTNESS,
+    cv2.CAP_PROP_CONTRAST,
+    cv2.CAP_PROP_SATURATION,
+    cv2.CAP_PROP_SHARPNESS,
+    cv2.CAP_PROP_GAMMA,
+    cv2.CAP_PROP_WHITE_BALANCE_BLUE_U,
+    cv2.CAP_PROP_GAIN,
+    cv2.CAP_PROP_PAN,
+    cv2.CAP_PROP_TILT,
+    cv2.CAP_PROP_ZOOM,
+    cv2.CAP_PROP_EXPOSURE,
+    cv2.CAP_PROP_BACKLIGHT,
+    cv2.CAP_PROP_ROLL,
+    cv2.CAP_PROP_IRIS,
+    cv2.CAP_PROP_FOCUS,
+    cv2.CAP_PROP_HUE
+]
+# Corresponding string value for each enumerator to be used in adjusting properties
+PROPERTIES_STR = [
+    'CAP_PROP_BRIGHTNESS',
+    'CAP_PROP_CONTRAST',
+    'CAP_PROP_SATURATION',
+    'CAP_PROP_SHARPNESS',
+    'CAP_PROP_GAMMA',
+    'CAP_PROP_WHITE_BALANCE_BLUE_U',
+    'CAP_PROP_GAIN',
+    'CAP_PROP_PAN',
+    'CAP_PROP_TILT',
+    'CAP_PROP_ZOOM',
+    'CAP_PROP_EXPOSURE',
+    'CAP_PROP_BACKLIGHT',
+    'CAP_PROP_ROLL',
+    'CAP_PROP_IRIS',
+    'CAP_PROP_FOCUS',
+    'CAP_PROP_HUE'
+]
+
 # Crops each image to the proper viewing size based on the WIDTH and HEIGHT
 # variables. This makes it so that the feed will take up the entire screen.
 # The main goal is to fit the proper aspect ratio. Returns the cropped image.
@@ -98,7 +137,11 @@ while 1:
     # Read the camera configurations
     with open(CONFIG_FILE) as f:
         data = json.load(f)
-        zoom_amount = float(data['zoom'])
+        #zoom_amount = float(data['zoom'])
+
+    for i in range(len(PROPERTIES)):
+        stream1.stream.set(PROPERTIES[i],float(data[PROPERTIES_STR[i]]))
+        stream2.stream.set(PROPERTIES[i],float(data[PROPERTIES_STR[i]]))
 
     # Get the images and crop them to the proper viewing size
     left = stream1.read()
@@ -107,10 +150,10 @@ while 1:
     right = crop(right)
 
     # Apply configurations if applicable
-    if zoom_amount > 1:
-        zoom_amount = min(zoom_amount, ZOOM_MAX)
-        left = zoom(left, zoom_amount)
-        right = zoom(right, zoom_amount)
+    #if zoom_amount > 1:
+    #    zoom_amount = min(zoom_amount, ZOOM_MAX)
+    #    left = zoom(left, zoom_amount)
+    #    right = zoom(right, zoom_amount)
 
     # Stitch together the final image and show it
     dual = np.concatenate((left, right), axis=1)
