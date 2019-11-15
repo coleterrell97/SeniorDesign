@@ -8,22 +8,22 @@ import re
 app = Flask(__name__)
 
 config_settings = {
-                    "CAP_PROP_BRIGHTNESS" : 0,
-                    "CAP_PROP_CONTRAST" : 15,
-                    "CAP_PROP_SATURATION" : 32,
-                    "CAP_PROP_SHARPNESS" : 16,
-                    "CAP_PROP_GAMMA" : 220,
-                    "CAP_PROP_WHITE_BALANCE_BLUE_U" : 5000,
-                    "CAP_PROP_GAIN" : 0,
-                    "CAP_PROP_PAN" : 0,
-                    "CAP_PROP_TILT" : 0,
-                    "CAP_PROP_ZOOM" : 100,
-                    "CAP_PROP_EXPOSURE" : 312,
-                    "CAP_PROP_BACKLIGHT" : 0,
-                    "CAP_PROP_ROLL" : 0,
-                    "CAP_PROP_IRIS" : 0,
-                    "CAP_PROP_FOCUS" : 0,
-                    "CAP_PROP_HUE" : 0
+                    "brightness" : 0,
+                    "contrast" : 15,
+                    "saturation" : 32,
+                    "sharpness" : 16,
+                    "gamma" : 220,
+                    "white" : 5000,
+                    "gain" : 0,
+                    "pan" : 0,
+                    "tilt" : 0,
+                    "zoom" : 100,
+                    "exposure" : 312,
+                    "backlight" : 0,
+                    "roll" : 0,
+                    "iris" : 0,
+                    "focus" : 0,
+                    "hue" : 0
                     }
 
 # Get camera sources
@@ -43,55 +43,10 @@ def index():
 
 @app.route("/update_values", methods=["POST"])
 def update_values():
-    print(config_settings)
-    #s = json.loads(config_settings)
-    brightness_update = request.form.get("brightness_slider")
-    config_settings["CAP_PROP_BRIGHTNESS"] = int(brightness_update)
+    props = ['brightness', 'contrast', 'saturation', 'sharpness', 'gamma', 'white', 'gain', 'pan', 'tilt', 'zoom', 'exposure', 'backlight', 'roll', 'iris', 'focus', 'hue']
 
-    contrast_update = request.form.get("contrast_slider")
-    config_settings["CAP_PROP_CONTRAST"] = int(contrast_update)
-
-    saturation_update = request.form.get("saturation_slider")
-    config_settings["CAP_PROP_SATURATION"] = int(saturation_update)
-
-    sharpness_update = request.form.get("sharpness_slider")
-    config_settings["CAP_PROP_SHARPNESS"] = int(sharpness_update)
-
-    gamma_update = request.form.get("gamma_slider")
-    config_settings["CAP_PROP_GAMMA"] = int(gamma_update)
-
-    white_update = request.form.get("white_slider")
-    config_settings["CAP_PROP_WHITE_BALANCE_BLUE_U"] = int(white_update)
-
-    gain_update = request.form.get("gain_slider")
-    config_settings["CAP_PROP_GAIN"] = int(gain_update)
-
-    Pan_update = request.form.get("Pan_slider")
-    config_settings["CAP_PROP_PAN"] = int(Pan_update)
-
-    tilt_update = request.form.get("tilt_slider")
-    config_settings["CAP_PROP_TILT"] = int(tilt_update)
-
-    zoom_update = request.form.get("zoom_slider")
-    config_settings["CAP_PROP_ZOOM"] = int(zoom_update)
-
-    exposure_update = request.form.get("exposure_slider")
-    config_settings["CAP_PROP_EXPOSURE"] = int(exposure_update)
-
-    backlight_update = request.form.get("backlight_slider")
-    config_settings["CAP_PROP_BACKLIGHT"] = int(backlight_update)
-
-    roll_update = request.form.get("roll_slider")
-    config_settings["CAP_PROP_ROLL"] = int(roll_update)
-
-    iris_update = request.form.get("iris_slider")
-    config_settings["CAP_PROP_IRIS"] = int(iris_update)
-
-    focus_update = request.form.get("focus_slider")
-    config_settings["CAP_PROP_FOCUS"] = int(focus_update)
-
-    hue_update = request.form.get("hue_slider")
-    config_settings["CAP_PROP_HUE"] = int(hue_update)
+    for prop in props:
+        config_settings[prop] = int(request.form.get(prop))
 
     file_to_open = "./API_files/camera_props.json"
     with open(file_to_open, "w") as f:
@@ -99,6 +54,59 @@ def update_values():
 
     print(config_settings)
     return render_template('index.html')
+#@app.route("/update_values", methods=["POST"])
+# def update_values():
+    # print(config_settings)
+    # s = json.loads(config_settings)
+    # brightness_update = request.form.get("brightness_slider")
+    # config_settings["CAP_PROP_BRIGHTNESS"] = int(brightness_update)
+    #
+    # contrast_update = request.form.get("contrast_slider")
+    # config_settings["CAP_PROP_CONTRAST"] = int(contrast_update)
+    #
+    # saturation_update = request.form.get("saturation_slider")
+    # config_settings["CAP_PROP_SATURATION"] = int(saturation_update)
+    #
+    # sharpness_update = request.form.get("sharpness_slider")
+    # config_settings["CAP_PROP_SHARPNESS"] = int(sharpness_update)
+    #
+    # gamma_update = request.form.get("gamma_slider")
+    # config_settings["CAP_PROP_GAMMA"] = int(gamma_update)
+    #
+    # white_update = request.form.get("white_slider")
+    # config_settings["CAP_PROP_WHITE_BALANCE_BLUE_U"] = int(white_update)
+    #
+    # gain_update = request.form.get("gain_slider")
+    # config_settings["CAP_PROP_GAIN"] = int(gain_update)
+    #
+    # Pan_update = request.form.get("Pan_slider")
+    # config_settings["CAP_PROP_PAN"] = int(Pan_update)
+    #
+    # tilt_update = request.form.get("tilt_slider")
+    # config_settings["CAP_PROP_TILT"] = int(tilt_update)
+    #
+    # zoom_update = request.form.get("zoom_slider")
+    # config_settings["CAP_PROP_ZOOM"] = int(zoom_update)
+    #
+    # exposure_update = request.form.get("exposure_slider")
+    # config_settings["CAP_PROP_EXPOSURE"] = int(exposure_update)
+    #
+    # backlight_update = request.form.get("backlight_slider")
+    # config_settings["CAP_PROP_BACKLIGHT"] = int(backlight_update)
+    #
+    # roll_update = request.form.get("roll_slider")
+    # config_settings["CAP_PROP_ROLL"] = int(roll_update)
+    #
+    # iris_update = request.form.get("iris_slider")
+    # config_settings["CAP_PROP_IRIS"] = int(iris_update)
+    #
+    # focus_update = request.form.get("focus_slider")
+    # config_settings["CAP_PROP_FOCUS"] = int(focus_update)
+    #
+    # hue_update = request.form.get("hue_slider")
+    # config_settings["CAP_PROP_HUE"] = int(hue_update)
+
+
 
 
 @app.route('/settings')
