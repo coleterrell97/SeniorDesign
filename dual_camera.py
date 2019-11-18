@@ -1,7 +1,7 @@
 import cv2
 from camera import CameraStream
 import numpy as np
-import signal, sys, json
+import signal, sys, json, time
 
 WINDOW_TITLE = 'Video Stream'
 CONFIG_FILE = 'config.json'
@@ -95,7 +95,6 @@ stream2 = CameraStream(src=src2).start()
 # Initialize other imporant parts
 signal.signal(signal.SIGINT, exit) # Calls exit function on ctrl^c
 cv2.namedWindow(WINDOW_TITLE, cv2.WINDOW_NORMAL)
-zoom_amount = 1
 
 # Streaming loop: continually get camera feeds and display them to the screen
 while 1:
@@ -113,12 +112,18 @@ while 1:
             stream2.stream.set(property, property_value)
 
     # Get the images and crop them to the proper viewing size
-    left = stream1.read()
-    right = stream2.read()
-    left = crop(left)
-    right = crop(right)
+    left = crop(stream1.read())
+    right = crop(stream2.read())
 
-    # Stitch together the final image and show it
-    dual = np.concatenate((left, right), axis=1)
+    # Determine if the images need to be vertically flipped
+    if CURRENT_CONFIG['vertical_flip']:
+        left = cv2.flip(left, 0) # 0 means preform a vertical flip
+        right = cv2.flip(right, 0)
+
+    # Determine the image orientation and show the frames
+    if not (CURRENT_CONFIG['swap_cameras']):
+        dual = np.concatenate((left, right), axis=1) # left to right
+    else:
+        dual = np.concatenate((right, left), axis=1) # right to lefts
     cv2.imshow(WINDOW_TITLE, dual)
     cv2.waitKey(1000//MAX_FRAMERATE)
