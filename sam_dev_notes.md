@@ -18,3 +18,9 @@ Added an exit function that safely joins the CameraStream thread back to the par
 
 ### 11/10/19
 Created a `dual_stream.py`: a script that implements two threaded CameraStream objects and stitches the two images together to create a VR viewable image. It starts by prompting the user to input which camera sources to use. Then, it creates the camera objects. Finally, it continually streams the stitched images to an OpenCV window. Behind the scenes it is applying a crop function that takes the two images and fits them to a desired aspect ratio so that it fully fills up the VR headset's screen. It also has a zoom function that is determined based on a config .json file.
+
+### 11/18/19
+Wrote code that made sure that the OpenCV configuration settings were only updated whenever the config file *changed* as opposed to updating every single frame iteration. I also added code to flip the images vertically as well as swap the left and right side images.
+
+### 11/20/19
+Added FPS (frames per second) calculations for performance tests.
