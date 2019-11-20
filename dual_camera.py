@@ -3,12 +3,15 @@ from camera import CameraStream
 import numpy as np
 import signal, sys, json, time
 
+# Defined variables
 WINDOW_TITLE = 'Video Stream'
 CONFIG_FILE = 'config.json'
 WIDTH = 1440 # Screen width
 HEIGHT = 900 # Screen height
-MAX_FRAMERATE = 30 # Frames per second
+MAX_FRAMERATE = 60 # Frames per second
 CURRENT_CONFIG = None # Current OpenCV camera settings
+FPS_PRINTED = False
+FPS_PRINT_CYCLE = 100 # How many frames to average the FPS over
 
 # CV2 enumerator to be used for adjusting properties
 PROPERTIES = [
@@ -97,7 +100,11 @@ signal.signal(signal.SIGINT, exit) # Calls exit function on ctrl^c
 cv2.namedWindow(WINDOW_TITLE, cv2.WINDOW_NORMAL)
 
 # Streaming loop: continually get camera feeds and display them to the screen
+iterations = 0 # How many frames have elapsed
+start_time = time.time()
 while 1:
+    iterations += 1
+
     # Read the camera configurations
     with open(CONFIG_FILE) as f:
         data = json.load(f)
@@ -126,4 +133,10 @@ while 1:
     else:
         dual = np.concatenate((right, left), axis=1) # right to lefts
     cv2.imshow(WINDOW_TITLE, dual)
-    cv2.waitKey(1000//MAX_FRAMERATE)
+    cv2.waitKey(1) # Necessary for imshow
+
+    # Handle FPS calculations
+    if not FPS_PRINTED and iterations % FPS_PRINT_CYCLE == 0:
+        average_fps = int(FPS_PRINT_CYCLE / (time.time() - start_time))
+        print('Average FPS:', average_fps)
+        FPS_PRINTED = True
