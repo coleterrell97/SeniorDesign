@@ -28,7 +28,12 @@ CONFIG_FILE = 'config.json'
 # Settings page homepage
 @app.route('/')
 def index():
-    return render_template('settings.html')
+    # Read the current camera configurations
+    with open(CONFIG_FILE, 'r') as f:
+        data = json.load(f)
+
+    # Render the settings page and send the current config with it
+    return render_template('settings.html', data=data)
 
 # Accepts POST request to update config file values
 @app.route("/", methods=["POST"])
@@ -41,7 +46,8 @@ def update_values():
     with open(CONFIG_FILE, "w") as f:
         f.write(json.dumps(CONFIG_SETTINGS))
 
-    return render_template('settings.html')
+    # Render the settings page and send the current config with it
+    return render_template('settings.html', data=CONFIG_SETTINGS)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, threaded=True)

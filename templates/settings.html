@@ -2,10 +2,19 @@
   <head>
     <title>Settings</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='settings.css') }}">
+    <link rel= "stylesheet" type="text/css" href="{{ url_for('static',filename='settings.css') }}">
   </head>
 
-  <body>
+  <body onload="getConfig()">
+    <table border = 1>
+         {% for key, value in data.items() %}
+            <tr>
+               <th> {{ key }} </th>
+               <td> {{ value }} </td>
+            </tr>
+         {% endfor %}
+      </table>
+
     <div class="w3-panel w3-red">
   <p><center>Settings</center></p>
 
