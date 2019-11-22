@@ -14,15 +14,27 @@
 <button onclick="window.location.href='/'">Back</button>
 
 <script>
-console.log("made it 1");
   var config_settings1 = {
-    "brightness": "15"
+              "brightness" : 15,
+              "contrast" : 15,
+              "saturation" : 32,
+              "sharpness" : 16,
+              "gamma" : 220,
+              "white" : 5000,
+              "gain" : 0,
+              "pan" : 0,
+              "tilt" : 0,
+              "zoom" : 100,
+              "exposure" : 312,
+              "backlight" : 0,
+              "roll" : 0,
+              "iris" : 0,
+              "focus" : 0,
+              "hue" : 0
   };
 
   var xhr = new XMLHttpRequest();
-  console.log("before get request");
   xhr.open('GET', "/send_values");
-  console.log("after get request");
   xhr.send();
 
   xhr.onload = function() {
@@ -31,16 +43,28 @@ console.log("made it 1");
   }
 };
 
-console.log("made it");
 xhr.onprogress = function(event) {
   if (event.lengthComputable) {
     var temp1 = xhr.responseText;
     var json_config_settings = JSON.parse(temp1);
-    console.log(json_config_settings["brightness"]);
-    console.log(json_config_settings);
     config_settings1 = json_config_settings;
   }
   document.getElementById("brightness").value = config_settings1["brightness"];
+  document.getElementById("contrast").value = config_settings1["contrast"];
+  document.getElementById("saturation").value = config_settings1["saturation"];
+  document.getElementById("sharpness").value = config_settings1["sharpness"];
+  document.getElementById("gamma").value = config_settings1["gamma"];
+  document.getElementById("white").value = config_settings1["white"];
+  document.getElementById("gain").value = config_settings1["gain"];
+  document.getElementById("pan").value = config_settings1["pan"];
+  document.getElementById("tilt").value = config_settings1["tilt"];
+  document.getElementById("zoom").value = config_settings1["zoom"];
+  document.getElementById("exposure").value = config_settings1["exposure"];
+  document.getElementById("backlight").value = config_settings1["backlight"];
+  document.getElementById("roll").value = config_settings1["roll"];
+  document.getElementById("iris").value = config_settings1["iris"];
+  document.getElementById("focus").value = config_settings1["focus"];
+  document.getElementById("hue").value = config_settings1["hue"];
 };
 
 xhr.onerror = function() {
@@ -53,81 +77,61 @@ xhr.onerror = function() {
   <div class="slidecontainer">
 
     <label for="-15" class="pull-left">-15</label>
-  <input type="range" min="-15" max="15" value='json_config_settings["brightness"]' name="brightness" class="slider" id="brightness">
+  <input type="range" min="-15" max="15" value='0' name="brightness" class="slider" id="brightness">
   <label for="15" class="pull-right">15</label>
   <label>Brightness</label>
 
-  <script>
-
-  console.log(config_settings1["brightness"]);
-  </script>
-<!--
-  <script>
-    var config_settings = {
-      "brightness": "15"
-    };
-
-    var slider = document.getElementById("brightness");
-
-    slider.oninput = function() {
-      config_settings["brightness"] = slider.value;
-    }
-    slider.value= config_settings["brightness"];
-
-  </script>
-
--->
   <br><label>0</label>
-  <input type="range" min="0" max="30" value="0" name="contrast" class="slider" name="contrast" id="Contrast">
+  <input type="range" min="0" max="30" value='0' name="contrast" class="slider" name="contrast" id="contrast">
   <label>30</label>
   <label>Contrast</label>
 
   <br><label>0</label>
-  <input type="range" min="0" max="60" value="0" name="saturation" class="slider" id="Saturation">
+  <input type="range" min="0" max="60" value="0" name="saturation" class="slider" id="saturation">
   <label>60</label>
   <label>Saturation</label>
 
   <br><label>0</label>
-  <input type="range" min="0" max="127" value="0" name="sharpness" class="slider" id="Sharpness">
+  <input type="range" min="0" max="127" value="0" name="sharpness" class="slider" id="sharpness">
   <label>127</label>
   <label>Sharpness</label>
 
   <br><label>40</label>
-  <input type="range" min="40" max="500" value="0" name="gamma" class="slider" id="Gamma">
+  <input type="range" min="40" max="500" value="0" name="gamma" class="slider" id="gamma">
   <label>500</label>
   <label>Gamma</label>
 
-  <br><input type="range" min="40" max="500" value="0" name="white" class="slider" id="Gamma">
+  <br><input type="range" min="40" max="500" value="0" name="white" class="slider" id="white">
   <label>White Balance Blue</label>
 
-  <br><input type="range" min="40" max="500" value="0" name="gain" class="slider" id="Gamma">
+  <br><input type="range" min="40" max="500" value="0" name="gain" class="slider" id="gain">
   <label>Gain</label>
 
-  <br><input type="range" min="40" max="500" value="0" name="pan" class="slider" id="Gamma">
+  <br><input type="range" min="40" max="500" value="0" name="pan" class="slider" id="pan">
   <label>Pan</label>
 
-  <br><input type="range" min="0" max="500" value="0" name="tilt" class="slider" id="Gamma">
+  <br><input type="range" min="0" max="500" value="0" name="tilt" class="slider" id="tilt">
   <label>Tilt</label>
 
-  <br><input type="range" min="0" max="500" value="0" name="zoom" class="slider" id="Gamma">
+  <br><input type="range" min="0" max="500" value="0" name="zoom" class="slider" id="zoom">
   <label>Zoom</label>
 
-  <br><input type="range" min="0" max="500" value="0" name="exposure" class="slider" id="Gamma">
+  <br><input type="range" min="0" max="500" value="0" name="exposure" class="slider" id="exposure">
   <label>Exposure</label>
 
-  <br><input type="range" min="0" max="500" value="0" name="backlight" class="slider" id="Gamma">
+  <br><input type="range" min="0" max="500" value="0" name="backlight" class="slider" id="backlight">
   <label>Backlight</label>
 
-  <br><input type="range" min="0" max="500" value="0" name="roll" class="slider" id="Gamma">
+  <br><input type="range" min="0" max="500" value="0" name="roll" class="slider" id="roll">
   <label>Roll</label>
 
-  <br><input type="range" min="0" max="500" value="0" name="iris" class="slider" id="Gamma">
+  <br><input type="range" min="0" max="500" value="0" name="iris" class="slider" id="iris">
   <label>Iris</label>
 
-  <br><input type="range" min="0" max="500" value="0" name="focus" class="slider" id="Gamma">
+  <br><input type="range" min="0" max="500" value="0" name="focus" class="slider" id="focus">
   <label>Focus</label>
 
-  <br><input type="range" min="0" max="500" value="0" name="hue" class="slider" id="Gamma">
+  <br><input type="range" min="0" max="500" value="0" name="hue" class="slider" id="hue">
   <label>Hue</label>
 
 

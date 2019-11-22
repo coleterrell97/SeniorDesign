@@ -58,7 +58,6 @@ def update_values():
 
 @app.route("/send_values", methods=["GET"])
 def send_values():
-    print("inside send values")
     return jsonify(config_settings)
 
 #@app.route("/update_values", methods=["POST"])
