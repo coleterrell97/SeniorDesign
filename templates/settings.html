@@ -9,16 +9,74 @@
     <div class="w3-panel w3-red">
   <p><center>Settings</center></p>
 
+
+
 <button onclick="window.location.href='/'">Back</button>
+
+<script>
+console.log("made it 1");
+  var config_settings1 = {
+    "brightness": "15"
+  };
+
+  var xhr = new XMLHttpRequest();
+  console.log("before get request");
+  xhr.open('GET', "/send_values");
+  console.log("after get request");
+  xhr.send();
+
+  xhr.onload = function() {
+  if (xhr.status != 200) { // analyze HTTP status of the response
+    alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
+  }
+};
+
+console.log("made it");
+xhr.onprogress = function(event) {
+  if (event.lengthComputable) {
+    var temp1 = xhr.responseText;
+    var json_config_settings = JSON.parse(temp1);
+    console.log(json_config_settings["brightness"]);
+    console.log(json_config_settings);
+    config_settings1 = json_config_settings;
+  }
+  document.getElementById("brightness").value = config_settings1["brightness"];
+};
+
+xhr.onerror = function() {
+  alert("Request failed");
+};
+</script>
+
 
 <form method="POST" action="/update_values">
   <div class="slidecontainer">
 
     <label for="-15" class="pull-left">-15</label>
-  <input type="range" min="-15" max="15" value="0" name="brightness" class="slider" id="myRange">
+  <input type="range" min="-15" max="15" value='json_config_settings["brightness"]' name="brightness" class="slider" id="brightness">
   <label for="15" class="pull-right">15</label>
   <label>Brightness</label>
 
+  <script>
+
+  console.log(config_settings1["brightness"]);
+  </script>
+<!--
+  <script>
+    var config_settings = {
+      "brightness": "15"
+    };
+
+    var slider = document.getElementById("brightness");
+
+    slider.oninput = function() {
+      config_settings["brightness"] = slider.value;
+    }
+    slider.value= config_settings["brightness"];
+
+  </script>
+
+-->
   <br><label>0</label>
   <input type="range" min="0" max="30" value="0" name="contrast" class="slider" name="contrast" id="Contrast">
   <label>30</label>
@@ -72,10 +130,13 @@
   <br><input type="range" min="0" max="500" value="0" name="hue" class="slider" id="Gamma">
   <label>Hue</label>
 
+
   <br><input type="submit" value="submit" />
 
 </div>
 </form>
+
+
 
     </div>
   </body>

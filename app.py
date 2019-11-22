@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, request, jsonify
 from camera import CameraStream
 import numpy as np
 import cv2
@@ -8,7 +8,7 @@ import re
 app = Flask(__name__)
 
 config_settings = {
-                    "brightness" : 0,
+                    "brightness" : 15,
                     "contrast" : 15,
                     "saturation" : 32,
                     "sharpness" : 16,
@@ -54,6 +54,13 @@ def update_values():
 
     print(config_settings)
     return render_template('index.html')
+
+
+@app.route("/send_values", methods=["GET"])
+def send_values():
+    print("inside send values")
+    return jsonify(config_settings)
+
 #@app.route("/update_values", methods=["POST"])
 # def update_values():
     # print(config_settings)
@@ -112,6 +119,11 @@ def update_values():
 @app.route('/settings')
 def settings():
     return render_template('settings.html')
+
+
+@app.route('/newSettings')
+def newSettings():
+    return render_template('newSettings.html')
 
 # Generates the images for the video stream
 def gen_frame():
