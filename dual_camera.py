@@ -1,16 +1,37 @@
 import cv2
 from camera import CameraStream
 import numpy as np
-import signal, sys, json
+import signal, sys, json, time
 
-printed = False
-
+# Defined variables
 WINDOW_TITLE = 'Video Stream'
 CONFIG_FILE = 'config.json'
 WIDTH = 1440 # Screen width
 HEIGHT = 900 # Screen height
-ZOOM_MAX = 6
-MAX_FRAMERATE = 30 # Frames per second
+MAX_FRAMERATE = 60 # Frames per second
+CURRENT_CONFIG = None # Current OpenCV camera settings
+FPS_PRINTED = False
+FPS_PRINT_CYCLE = 100 # How many frames to average the FPS over
+
+# CV2 enumerator to be used for adjusting properties
+PROPERTIES = [
+    (cv2.CAP_PROP_BRIGHTNESS, 'CAP_PROP_BRIGHTNESS'),
+    (cv2.CAP_PROP_CONTRAST, 'CAP_PROP_CONTRAST'),
+    (cv2.CAP_PROP_SATURATION, 'CAP_PROP_SATURATION'),
+    (cv2.CAP_PROP_SHARPNESS, 'CAP_PROP_SHARPNESS'),
+    (cv2.CAP_PROP_GAMMA, 'CAP_PROP_GAMMA'),
+    (cv2.CAP_PROP_WHITE_BALANCE_BLUE_U, 'CAP_PROP_WHITE_BALANCE_BLUE_U'),
+    (cv2.CAP_PROP_GAIN, 'CAP_PROP_GAIN'),
+    (cv2.CAP_PROP_PAN, 'CAP_PROP_PAN'),
+    (cv2.CAP_PROP_TILT, 'CAP_PROP_TILT'),
+    (cv2.CAP_PROP_ZOOM, 'CAP_PROP_ZOOM'),
+    (cv2.CAP_PROP_EXPOSURE, 'CAP_PROP_EXPOSURE'),
+    (cv2.CAP_PROP_BACKLIGHT, 'CAP_PROP_BACKLIGHT'),
+    (cv2.CAP_PROP_ROLL, 'CAP_PROP_ROLL'),
+    (cv2.CAP_PROP_IRIS, 'CAP_PROP_IRIS'),
+    (cv2.CAP_PROP_FOCUS, 'CAP_PROP_FOCUS'),
+    (cv2.CAP_PROP_HUE, 'CAP_PROP_HUE'),
+]
 
 # Crops each image to the proper viewing size based on the WIDTH and HEIGHT
 # variables. This makes it so that the feed will take up the entire screen.
@@ -60,21 +81,6 @@ def crop(img):
     minY,maxY = centerY - (desired_height//2), centerY + (desired_height // 2)
     return img[minX:maxX, minY:maxY]
 
-# Returns a zoomed in image based off of a scale factor
-def zoom(img, scale):
-    # Get starting dimension
-    height, width, channels = img.shape
-
-    #prepare the crop
-    centerX, centerY = int(height//2), int(width//2)
-    radiusX, radiusY = int(height/scale/2), int(width/scale/2)
-    minX, maxX = centerX - radiusX, centerX + radiusX
-    minY, maxY = centerY - radiusY, centerY + radiusY
-
-    # Preform and return the zoomed in crop
-    zoomed = img[minX:maxX, minY:maxY]
-    return crop(zoomed)
-
 # Ends the video feed processes -- joins all threads
 def exit(sigal_num=None, signal_frame=None):
     stream1.stop()
@@ -92,27 +98,45 @@ stream2 = CameraStream(src=src2).start()
 # Initialize other imporant parts
 signal.signal(signal.SIGINT, exit) # Calls exit function on ctrl^c
 cv2.namedWindow(WINDOW_TITLE, cv2.WINDOW_NORMAL)
-zoom_amount = 1
 
+# Streaming loop: continually get camera feeds and display them to the screen
+iterations = 0 # How many frames have elapsed
+start_time = time.time()
 while 1:
+    iterations += 1
+
     # Read the camera configurations
     with open(CONFIG_FILE) as f:
         data = json.load(f)
-        zoom_amount = float(data['zoom'])
+
+    # Apply the loaded configurations. Only update the settings when the config
+    # file is changed
+    if data != CURRENT_CONFIG:
+        CURRENT_CONFIG = data
+        for property, property_str in PROPERTIES:
+            property_value = float(CURRENT_CONFIG[property_str])
+            stream1.stream.set(property, property_value)
+            stream2.stream.set(property, property_value)
 
     # Get the images and crop them to the proper viewing size
-    left = stream1.read()
-    right = stream2.read()
-    left = crop(left)
-    right = crop(right)
+    left = crop(stream1.read())
+    right = crop(stream2.read())
 
-    # Apply configurations if applicable
-    if zoom_amount > 1:
-        zoom_amount = min(zoom_amount, ZOOM_MAX)
-        left = zoom(left, zoom_amount)
-        right = zoom(right, zoom_amount)
+    # Determine if the images need to be vertically flipped
+    if CURRENT_CONFIG['vertical_flip']:
+        left = cv2.flip(left, 0) # 0 means preform a vertical flip
+        right = cv2.flip(right, 0)
 
-    # Stitch together the final image and show it
-    dual = np.concatenate((left, right), axis=1)
+    # Determine the image orientation and show the frames
+    if not (CURRENT_CONFIG['swap_cameras']):
+        dual = np.concatenate((left, right), axis=1) # left to right
+    else:
+        dual = np.concatenate((right, left), axis=1) # right to lefts
     cv2.imshow(WINDOW_TITLE, dual)
-    cv2.waitKey(1000//MAX_FRAMERATE)
+    cv2.waitKey(1) # Necessary for imshow
+
+    # Handle FPS calculations
+    if not FPS_PRINTED and iterations % FPS_PRINT_CYCLE == 0:
+        average_fps = int(FPS_PRINT_CYCLE / (time.time() - start_time))
+        print('Average FPS:', average_fps)
+        FPS_PRINTED = True
