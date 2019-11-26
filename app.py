@@ -1,10 +1,5 @@
 from flask import Flask, render_template, Response, request, jsonify
-from camera import CameraStream
-import numpy as np
-import cv2
-import time, signal
 import json
-import re
 app = Flask(__name__)
 
 CONFIG_SETTINGS = {
@@ -44,19 +39,11 @@ def update_values():
     with open(CONFIG_FILE, "w") as f:
         f.write(json.dumps(CONFIG_SETTINGS))
 
-    print(CONFIG_SETTINGS)
     return render_template('index.html')
-
 
 @app.route("/send_values", methods=["GET"])
 def send_values():
     return jsonify(CONFIG_SETTINGS)
-
-
-@app.route('/settings')
-def settings():
-    return render_template('settings.html')
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, threaded=True)

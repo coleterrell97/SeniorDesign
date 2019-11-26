@@ -1,15 +1,80 @@
 <html>
   <head>
-    <title>Video Stream</title>
+    <title>Settings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='index.css')}}">
+    <script src="{{url_for('static',filename='index.js')}}"></script>
   </head>
 
   <body>
-  <p><center>Real Time Tele-Ophthalmology</center></p>
+    <div class="">
+      <p><center>Settings</center></p>
 
-<center>
-  <button onclick="window.location.href='/settings'">Settings</button>
-    </center>
+      <form method="POST" action="/update_values">
+        <div class="slideContainer">
 
+          <label for="-15" class="pull-left">-15</label>
+          <input type="range" min="-15" max="15" value='0' name="CAP_PROP_BRIGHTNESS" class="slider" id="CAP_PROP_BRIGHTNESS">
+          <label for="15" class="pull-right">15</label>
+          <label>Brightness</label>
 
+          <br><label>0</label>
+          <input type="range" min="0" max="30" value='0' name="CAP_PROP_CONTRAST" class="slider" id="CAP_PROP_CONTRAST">
+          <label>30</label>
+          <label>Contrast</label>
+
+          <br><label>0</label>
+          <input type="range" min="0" max="60" value="0" name="CAP_PROP_SATURATION" class="slider" id="CAP_PROP_SATURATION">
+          <label>60</label>
+          <label>Saturation</label>
+
+          <br><label>0</label>
+          <input type="range" min="0" max="127" value="0" name="CAP_PROP_SHARPNESS" class="slider" id="CAP_PROP_SHARPNESS">
+          <label>127</label>
+          <label>Sharpness</label>
+
+          <br><label>40</label>
+          <input type="range" min="40" max="500" value="0" name="CAP_PROP_GAMMA" class="slider" id="CAP_PROP_GAMMA">
+          <label>500</label>
+          <label>Gamma</label>
+
+          <br><input type="range" min="40" max="500" value="0" name="CAP_PROP_WHITE_BALANCE_BLUE_U" class="slider" id="CAP_PROP_WHITE_BALANCE_BLUE_U">
+          <label>White Balance Blue</label>
+
+          <br><input type="range" min="40" max="500" value="0" name="CAP_PROP_GAIN" class="slider" id="CAP_PROP_GAIN">
+          <label>Gain</label>
+
+          <br><input type="range" min="40" max="500" value="0" name="CAP_PROP_PAN" class="slider" id="CAP_PROP_PAN">
+          <label>Pan</label>
+
+          <br><input type="range" min="0" max="500" value="0" name="CAP_PROP_TILT" class="slider" id="CAP_PROP_TILT">
+          <label>Tilt</label>
+
+          <br><input type="range" min="0" max="500" value="0" name="CAP_PROP_ZOOM" class="slider" id="CAP_PROP_ZOOM">
+          <label>Zoom</label>
+
+          <br><input type="range" min="0" max="500" value="0" name="CAP_PROP_EXPOSURE" class="slider" id="CAP_PROP_EXPOSURE">
+          <label>Exposure</label>
+
+          <br><input type="range" min="0" max="500" value="0" name="CAP_PROP_BACKLIGHT" class="slider" id="CAP_PROP_BACKLIGHT">
+          <label>Backlight</label>
+
+          <br><input type="range" min="0" max="500" value="0" name="CAP_PROP_ROLL" class="slider" id="CAP_PROP_ROLL">
+          <label>Roll</label>
+
+          <br><input type="range" min="0" max="500" value="0" name="CAP_PROP_IRIS" class="slider" id="CAP_PROP_IRIS">
+          <label>Iris</label>
+
+          <br><input type="range" min="0" max="500" value="0" name="CAP_PROP_FOCUS" class="slider" id="CAP_PROP_FOCUS">
+          <label>Focus</label>
+
+          <br><input type="range" min="0" max="500" value="0" name="CAP_PROP_HUE" class="slider" id="CAP_PROP_HUE">
+          <label>Hue</label>
+
+          <br><input type="submit" value="submit" />
+
+        </div>
+      </form>
+    </div>
   </body>
 </html>
