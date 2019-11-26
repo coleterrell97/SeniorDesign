@@ -18,4 +18,13 @@ November 9th:
 Worked on updating the architecture assignment. We got a 75 on it
 the first time around so we took the feedback we recieved and 
 updated the document accordingly. 
- 
+
+November 20th:
+Trying to make the sliders on the settings page remain at their 
+set values when the settings page is reopened.
+
+November 23rd:
+Was able to make the sliders on the settings page remain at their
+set values when the settings page is reopened. Still need to set the 
+slider values to their initial start values and add the correct
+ranges for each slider. 

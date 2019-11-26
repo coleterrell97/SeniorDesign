@@ -1,7 +1,12 @@
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, request, jsonify
+from camera import CameraStream
+import numpy as np
+import cv2
+import time, signal
 import json
-
+import re
 app = Flask(__name__)
+
 CONFIG_SETTINGS = {
         "CAP_PROP_BRIGHTNESS" : 0,
         "CAP_PROP_CONTRAST" : 15,
@@ -24,19 +29,12 @@ CONFIG_SETTINGS = {
 SETTINGS_PAGE = 'settings.html'
 CONFIG_FILE = 'config.json'
 
-
-# Settings page homepage
+# Video streaming home page
 @app.route('/')
 def index():
-    # Read the current camera configurations
-    with open(CONFIG_FILE, 'r') as f:
-        data = json.load(f)
+    return render_template('index.html')
 
-    # Render the settings page and send the current config with it
-    return render_template('settings.html', data=data)
-
-# Accepts POST request to update config file values
-@app.route("/", methods=["POST"])
+@app.route("/update_values", methods=["POST"])
 def update_values():
     # Get and update values from the settings page
     for prop in CONFIG_SETTINGS.keys():
@@ -46,8 +44,19 @@ def update_values():
     with open(CONFIG_FILE, "w") as f:
         f.write(json.dumps(CONFIG_SETTINGS))
 
-    # Render the settings page and send the current config with it
-    return render_template('settings.html', data=CONFIG_SETTINGS)
+    print(CONFIG_SETTINGS)
+    return render_template('index.html')
+
+
+@app.route("/send_values", methods=["GET"])
+def send_values():
+    return jsonify(CONFIG_SETTINGS)
+
+
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, threaded=True)

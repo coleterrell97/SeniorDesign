@@ -1,37 +1,15 @@
 <html>
   <head>
     <title>Video Stream</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='index.css') }}">
   </head>
 
   <body>
-    <div class="w3-panel w3-red">
   <p><center>Real Time Tele-Ophthalmology</center></p>
-
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script type=text/javascript>
-        $(function() {
-          $('a#test').bind('click', function() {
-            $.getJSON('/flip_cameras',
-                function(data) {
-            });
-            return false;
-          });
-
-        });
-</script>
-
-  <form><center>
-    <a href="#" id=test><button class='btn btn-default'>Flip Cameras</button></a>
-  <!--<a href="#" class="w3-button w3-purple">Flip Cameras</a>-->
-  </center></form>
 
 <center>
   <button onclick="window.location.href='/settings'">Settings</button>
     </center>
 
-  </div>
-    <img src="{{ url_for('video_feed') }}">
+
   </body>
 </html>
