@@ -15,23 +15,23 @@
 
 <script>
   var config_settings1 = {
-              "brightness" : 15,
-              "contrast" : 15,
-              "saturation" : 32,
-              "sharpness" : 16,
-              "gamma" : 220,
-              "white" : 5000,
-              "gain" : 0,
-              "pan" : 0,
-              "tilt" : 0,
-              "zoom" : 100,
-              "exposure" : 312,
-              "backlight" : 0,
-              "roll" : 0,
-              "iris" : 0,
-              "focus" : 0,
-              "hue" : 0
-  };
+        "CAP_PROP_BRIGHTNESS" : 0,
+        "CAP_PROP_CONTRAST" : 15,
+        "CAP_PROP_SATURATION" : 32,
+        "CAP_PROP_SHARPNESS" : 16,
+        "CAP_PROP_GAMMA" : 220,
+        "CAP_PROP_WHITE_BALANCE_BLUE_U" : 5000,
+        "CAP_PROP_GAIN" : 0,
+        "CAP_PROP_PAN" : 0,
+        "CAP_PROP_TILT" : 0,
+        "CAP_PROP_ZOOM" : 100,
+        "CAP_PROP_EXPOSURE" : 312,
+        "CAP_PROP_BACKLIGHT" : 0,
+        "CAP_PROP_ROLL" : 0,
+        "CAP_PROP_IRIS" : 0,
+        "CAP_PROP_FOCUS" : 0,
+        "CAP_PROP_HUE" : 0
+    };
 
   var xhr = new XMLHttpRequest();
   xhr.open('GET', "/send_values");
@@ -49,22 +49,22 @@ xhr.onprogress = function(event) {
     var json_config_settings = JSON.parse(temp1);
     config_settings1 = json_config_settings;
   }
-  document.getElementById("brightness").value = config_settings1["brightness"];
-  document.getElementById("contrast").value = config_settings1["contrast"];
-  document.getElementById("saturation").value = config_settings1["saturation"];
-  document.getElementById("sharpness").value = config_settings1["sharpness"];
-  document.getElementById("gamma").value = config_settings1["gamma"];
-  document.getElementById("white").value = config_settings1["white"];
-  document.getElementById("gain").value = config_settings1["gain"];
-  document.getElementById("pan").value = config_settings1["pan"];
-  document.getElementById("tilt").value = config_settings1["tilt"];
-  document.getElementById("zoom").value = config_settings1["zoom"];
-  document.getElementById("exposure").value = config_settings1["exposure"];
-  document.getElementById("backlight").value = config_settings1["backlight"];
-  document.getElementById("roll").value = config_settings1["roll"];
-  document.getElementById("iris").value = config_settings1["iris"];
-  document.getElementById("focus").value = config_settings1["focus"];
-  document.getElementById("hue").value = config_settings1["hue"];
+  document.getElementById("CAP_PROP_BRIGHTNESS").value = config_settings1["CAP_PROP_BRIGHTNESS"];
+  document.getElementById("CAP_PROP_CONTRAST").value = config_settings1["CAP_PROP_CONTRAST"];
+  document.getElementById("CAP_PROP_SATURATION").value = config_settings1["CAP_PROP_SATURATION"];
+  document.getElementById("CAP_PROP_SHARPNESS").value = config_settings1["CAP_PROP_SHARPNESS"];
+  document.getElementById("CAP_PROP_GAMMA").value = config_settings1["CAP_PROP_GAMMA"];
+  document.getElementById("CAP_PROP_WHITE_BALANCE_BLUE_U").value = config_settings1["CAP_PROP_WHITE_BALANCE_BLUE_U"];
+  document.getElementById("CAP_PROP_GAIN").value = config_settings1["CAP_PROP_GAIN"];
+  document.getElementById("CAP_PROP_PAN").value = config_settings1["CAP_PROP_PAN"];
+  document.getElementById("CAP_PROP_TILT").value = config_settings1["CAP_PROP_TILT"];
+  document.getElementById("CAP_PROP_ZOOM").value = config_settings1["CAP_PROP_ZOOM"];
+  document.getElementById("CAP_PROP_EXPOSURE").value = config_settings1["CAP_PROP_EXPOSURE"];
+  document.getElementById("CAP_PROP_BACKLIGHT").value = config_settings1["CAP_PROP_BACKLIGHT"];
+  document.getElementById("CAP_PROP_ROLL").value = config_settings1["CAP_PROP_ROLL"];
+  document.getElementById("CAP_PROP_IRIS").value = config_settings1["CAP_PROP_IRIS"];
+  document.getElementById("CAP_PROP_FOCUS").value = config_settings1["CAP_PROP_FOCUS"];
+  document.getElementById("CAP_PROP_HUE").value = config_settings1["CAP_PROP_HUE"];
 };
 
 xhr.onerror = function() {
@@ -77,61 +77,61 @@ xhr.onerror = function() {
   <div class="slidecontainer">
 
     <label for="-15" class="pull-left">-15</label>
-  <input type="range" min="-15" max="15" value='0' name="brightness" class="slider" id="brightness">
+  <input type="range" min="-15" max="15" value='0' name="CAP_PROP_BRIGHTNESS" class="slider" id="CAP_PROP_BRIGHTNESS">
   <label for="15" class="pull-right">15</label>
   <label>Brightness</label>
 
   <br><label>0</label>
-  <input type="range" min="0" max="30" value='0' name="contrast" class="slider" name="contrast" id="contrast">
+  <input type="range" min="0" max="30" value='0' name="CAP_PROP_CONTRAST" class="slider" id="CAP_PROP_CONTRAST">
   <label>30</label>
   <label>Contrast</label>
 
   <br><label>0</label>
-  <input type="range" min="0" max="60" value="0" name="saturation" class="slider" id="saturation">
+  <input type="range" min="0" max="60" value="0" name="CAP_PROP_SATURATION" class="slider" id="CAP_PROP_SATURATION">
   <label>60</label>
   <label>Saturation</label>
 
   <br><label>0</label>
-  <input type="range" min="0" max="127" value="0" name="sharpness" class="slider" id="sharpness">
+  <input type="range" min="0" max="127" value="0" name="CAP_PROP_SHARPNESS" class="slider" id="CAP_PROP_SHARPNESS">
   <label>127</label>
   <label>Sharpness</label>
 
   <br><label>40</label>
-  <input type="range" min="40" max="500" value="0" name="gamma" class="slider" id="gamma">
+  <input type="range" min="40" max="500" value="0" name="CAP_PROP_GAMMA" class="slider" id="CAP_PROP_GAMMA">
   <label>500</label>
   <label>Gamma</label>
 
-  <br><input type="range" min="40" max="500" value="0" name="white" class="slider" id="white">
+  <br><input type="range" min="40" max="500" value="0" name="CAP_PROP_WHITE_BALANCE_BLUE_U" class="slider" id="CAP_PROP_WHITE_BALANCE_BLUE_U">
   <label>White Balance Blue</label>
 
-  <br><input type="range" min="40" max="500" value="0" name="gain" class="slider" id="gain">
+  <br><input type="range" min="40" max="500" value="0" name="CAP_PROP_GAIN" class="slider" id="CAP_PROP_GAIN">
   <label>Gain</label>
 
-  <br><input type="range" min="40" max="500" value="0" name="pan" class="slider" id="pan">
+  <br><input type="range" min="40" max="500" value="0" name="CAP_PROP_PAN" class="slider" id="CAP_PROP_GAIN">
   <label>Pan</label>
 
-  <br><input type="range" min="0" max="500" value="0" name="tilt" class="slider" id="tilt">
+  <br><input type="range" min="0" max="500" value="0" name="CAP_PROP_TILT" class="slider" id="CAP_PROP_TILT">
   <label>Tilt</label>
 
-  <br><input type="range" min="0" max="500" value="0" name="zoom" class="slider" id="zoom">
+  <br><input type="range" min="0" max="500" value="0" name="CAP_PROP_ZOOM" class="slider" id="CAP_PROP_ZOOM">
   <label>Zoom</label>
 
-  <br><input type="range" min="0" max="500" value="0" name="exposure" class="slider" id="exposure">
+  <br><input type="range" min="0" max="500" value="0" name="CAP_PROP_EXPOSURE" class="slider" id="CAP_PROP_EXPOSURE">
   <label>Exposure</label>
 
-  <br><input type="range" min="0" max="500" value="0" name="backlight" class="slider" id="backlight">
+  <br><input type="range" min="0" max="500" value="0" name="CAP_PROP_BACKLIGHT" class="slider" id="CAP_PROP_BACKLIGHT">
   <label>Backlight</label>
 
-  <br><input type="range" min="0" max="500" value="0" name="roll" class="slider" id="roll">
+  <br><input type="range" min="0" max="500" value="0" name="CAP_PROP_ROLL" class="slider" id="CAP_PROP_ROLL">
   <label>Roll</label>
 
-  <br><input type="range" min="0" max="500" value="0" name="iris" class="slider" id="iris">
+  <br><input type="range" min="0" max="500" value="0" name="CAP_PROP_IRIS" class="slider" id="CAP_PROP_IRIS">
   <label>Iris</label>
 
-  <br><input type="range" min="0" max="500" value="0" name="focus" class="slider" id="focus">
+  <br><input type="range" min="0" max="500" value="0" name="CAP_PROP_FOCUS" class="slider" id="CAP_PROP_FOCUS">
   <label>Focus</label>
 
-  <br><input type="range" min="0" max="500" value="0" name="hue" class="slider" id="hue">
+  <br><input type="range" min="0" max="500" value="0" name="CAP_PROP_HUE" class="slider" id="CAP_PROP_HUE">
   <label>Hue</label>
 
 
