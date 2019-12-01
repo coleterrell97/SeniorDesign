@@ -1,0 +1,14 @@
+I have spent much of my working time on this project ensuring that we have the proper install of
+OpenCV on a desktop running Ubuntu. This has required that we use the custom patch of OpenCV that
+is provided by econsystems, the company that makes the cameras that we are using.
+
+Originally, I was struggling to get the install to complete; with the help of our customer,
+I was able to successfully install the correct patch of OpenCV. We discovered that the
+econsystems patch broke Python support, so we had to use an old version of the patch.
+
+Currently, I am working with Sam to ensure that our code works properly with the production
+cameras that we will be using. This might take some slight adjustments, but should otherwise not pose
+a great challenge.
+
+I am also largely in charge of developing our coding assignment presentation. This should also not pose
+a significant challenge.
