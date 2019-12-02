@@ -3,6 +3,8 @@ import json
 app = Flask(__name__)
 
 CONFIG_SETTINGS = {
+        "SWAP_CAMERAS": 0,
+        "VERTICAL_FLIP": 0,
         "CAP_PROP_BRIGHTNESS" : 0,
         "CAP_PROP_CONTRAST" : 15,
         "CAP_PROP_SATURATION" : 32,
@@ -31,6 +33,12 @@ def index():
 
 @app.route("/update_values", methods=["POST"])
 def update_values():
+    v = int(request.form.get("SWAP_CAMERAS"))
+    u = int(request.form.get("VERTICAL_FLIP"))
+    print("!!!!!!!")
+    print(v)
+    print(u)
+
     # Get and update values from the settings page
     for prop in CONFIG_SETTINGS.keys():
         CONFIG_SETTINGS[prop] = int(request.form.get(prop))

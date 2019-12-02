@@ -13,7 +13,13 @@
       <form method="POST" action="/update_values">
         <div class="slideContainer">
 
-          <label for="-15" class="pull-left">-15</label>
+          <br><input type="checkbox" name="SWAP_CAMERAS" value='1'> Swap Cameras
+          <input type='hidden' value='0' name="SWAP_CAMERAS">
+
+          <br><input type="checkbox" name="VERTICAL_FLIP" value='1'> Vertical Flip
+          <input type='hidden' value='0' name="VERTICAL_FLIP">
+
+          <br><label for="-15" class="pull-left">-15</label>
           <input type="range" min="-15" max="15" value='0' name="CAP_PROP_BRIGHTNESS" class="slider" id="CAP_PROP_BRIGHTNESS">
           <label for="15" class="pull-right">15</label>
           <label>Brightness</label>
