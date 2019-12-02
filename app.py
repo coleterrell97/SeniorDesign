@@ -33,12 +33,6 @@ def index():
 
 @app.route("/update_values", methods=["POST"])
 def update_values():
-    v = int(request.form.get("SWAP_CAMERAS"))
-    u = int(request.form.get("VERTICAL_FLIP"))
-    print("!!!!!!!")
-    print(v)
-    print(u)
-
     # Get and update values from the settings page
     for prop in CONFIG_SETTINGS.keys():
         CONFIG_SETTINGS[prop] = int(request.form.get(prop))
